@@ -1,0 +1,19 @@
+# Ignore all node_modules folders in any subdirectory
+**/node_modules/
+
+# Ignore all .env files in any subdirectory
+**/.env
+
+# Ignore all log files (e.g., error.log, debug.log)
+**/*.log
+
+# Ignore common output folders from builds (like React, Vite, etc.)
+**/dist/
+**/build/
+
+# Ignore OS-specific or IDE files
+.DS_Store
+*.swp
+*.swo
+.vscode/
+.idea/
