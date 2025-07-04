@@ -1,26 +1,34 @@
 <%- include('partials/head') %>
-  </head>
-  <body
-    class="bg-gray-50 min-h-screen flex flex-col items-center justify-start px-4 py-8 space-y-10"
-  >
-    <!-- Header with navigation -->
-   <%- include('partials/nav') %>
-    <!-- Main content -->
-    <main
-      class="w-full max-w-2xl bg-white rounded-2xl shadow-lg p-8 text-center space-y-6"
-    >
-      <h1 class="text-4xl font-bold text-blue-600">Welcome to Airbnb</h1>
-      <p class="text-gray-600">Find your next stay or become a host!</p>
+</head>
+<body class="bg-gray-50 min-h-screen flex flex-col items-center justify-start px-4 py-8 space-y-10">
 
-      <div class="space-y-4">
-        <% homes.forEach(home => { %>
-        <div class="p-4 bg-gray-100 rounded-lg shadow text-left transition-shadow hover:shadow-2xl">
-          <h2 class="text-lg font-semibold text-gray-800  ">
-            <%= home.houseName %>
-          </h2>
+  <!-- Navigation -->
+  <%- include('partials/nav') %>
+
+  <!-- Main Content -->
+  <main class="w-full max-w-6xl bg-white rounded-2xl shadow-lg p-8 space-y-6">
+    <h1 class="text-4xl font-bold text-blue-600 text-center">Welcome to Airbnb</h1>
+    <p class="text-gray-600 text-center">Find your next stay or become a host!</p>
+
+    <!-- Homes Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <% homes.forEach(home => { %>
+        <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow border border-gray-200">
+          <img
+            src="<%= home.photoUrl %>"
+            alt="<%= home.houseName %>"
+            class="w-full h-48 object-cover"
+            onerror="this.onerror=null;this.src='https://via.placeholder.com/400x300';"
+          />
+          <div class="p-4 space-y-2">
+            <h2 class="text-xl font-semibold text-gray-800"><%= home.houseName %></h2>
+            <p class="text-gray-600"><%= home.location %></p>
+            <p class="text-blue-600 font-medium">₹<%= home.price %> / night</p>
+            <p class="text-yellow-500 font-semibold">⭐ <%= home.rating %> / 5</p>
+          </div>
         </div>
-        <% }) %>
-      </div>
-    </main>
-  </body>
+      <% }) %>
+    </div>
+  </main>
+</body>
 </html>

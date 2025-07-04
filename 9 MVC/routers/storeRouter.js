@@ -1,13 +1,8 @@
 const express= require('express');
-
-
+const storeController = require('../controller/storeController');
 const storeRouter = express.Router();
 
-const { registeredHomes } = require('./hostRouter');
 
-storeRouter.get("/", (req, res, next) => {
-  console.log(registeredHomes);
-  res.render('index.ejs',{homes: registeredHomes, pageTitle: 'Hamara Airbnb'});
-});
+storeRouter.get("/", storeController.getHome );
 
 module.exports = storeRouter;

@@ -7,6 +7,7 @@ const path = require("path");
 const {hostRouter} = require('./routers/hostRouter');
 const storeRouter = require("./routers/storeRouter");
 const rootDir = require('./utils/path-util');
+const errorController = require('./controller/errorController');
 
 
 const app = express();
@@ -27,10 +28,7 @@ app.use(storeRouter);
 app.use('/host',hostRouter);
 
 
-app.use((req, res, next) => {
-  res.statusCode = 404; //for user side error this is page not found error
-  res.render('404.ejs',{pageTitle:'Page Not Found'});
-});
+app.use(errorController.get404);
 
 const PORT = 3001;
 
