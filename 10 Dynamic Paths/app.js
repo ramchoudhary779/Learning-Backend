@@ -1,0 +1,37 @@
+const http = require("http");
+const bodyParser = require("body-parser");
+const express = require("express");
+const path = require("path");
+
+
+const {hostRouter} = require('./routers/hostRouter');
+const storeRouter = require("./routers/storeRouter");
+const rootDir = require('./utils/path-util');
+const errorController = require('./controller/errorController');
+
+
+const app = express();
+
+app.set("view enginge",'ejs');//for using ejs 
+app.set('views','views');//giving file name
+app.use(express.static(path.join(rootDir,"public")));
+
+
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use((req, res, next) => {
+  console.log("First Middleware", req.url, req.method, req.body);
+  next();
+});
+
+
+app.use(storeRouter);
+app.use('/host',hostRouter);
+
+
+app.use(errorController.get404);
+
+const PORT = 3001;
+
+app.listen(PORT, () => {
+  console.log(`Server Running at : http://localhost:${PORT}`);
+});

@@ -1,0 +1,46 @@
+<%- include('../partials/head') %>
+</head>
+<body class="bg-gray-50 min-h-screen flex flex-col items-center justify-start px-4 py-8 space-y-10">
+
+  <!-- Navigation -->
+  <%- include('../partials/nav') %>
+
+  <!-- Main Content -->
+  <main class="w-full max-w-4xl bg-white rounded-2xl shadow-lg p-6 md:p-10 space-y-6">
+    <h1 class="text-4xl font-bold text-blue-600 text-center">Your Home Details</h1>
+
+    <!-- Home Card -->
+    <div class="rounded-xl overflow-hidden shadow-lg border border-gray-200">
+      <img
+        src="<%= home.photoUrl %>"
+        alt="<%= home.houseName %>"
+        class="w-full max-h-[450px] object-cover"
+        onerror="this.onerror=null;this.src='https://via.placeholder.com/800x500';"
+      />
+
+      <div class="p-6 space-y-4">
+        <h2 class="text-2xl font-bold text-gray-800"><%= home.houseName %></h2>
+
+        <p class="text-gray-600 text-base flex items-center gap-2">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M12 11c1.104 0 2-.896 2-2s-.896-2-2-2-2 .896-2 2 .896 2 2 2z" />
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" />
+          </svg>
+          <%= home.location %>
+        </p>
+
+        <p class="text-yellow-500 font-semibold text-lg">⭐ <%= home.rating %> / 5</p>
+        <p class="text-blue-600 font-semibold text-lg">₹<%= home.price %> / night</p>
+      </div>
+
+       <div class="p-6 ">
+           <%- include('../partials/add-to-favourite',{home : home}) %>
+       </div>
+    </div>
+  
+
+  </main>
+</body>
+</html>

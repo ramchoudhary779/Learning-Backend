@@ -1,0 +1,53 @@
+<%- include('../partials/head') %>
+</head>
+<body class="bg-gray-50 min-h-screen flex flex-col items-center justify-start px-4 py-8 space-y-10">
+
+  <!-- Navigation -->
+  <%- include('../partials/nav') %>
+
+  <!-- Main Content -->
+  <main class="w-full max-w-6xl bg-white rounded-2xl shadow-lg p-8 space-y-6">
+    <h1 class="text-4xl font-bold text-blue-600 text-center">Here are all your Favourites</h1>
+    <p class="text-gray-600 text-center">Find your next stay or become a host!</p>
+
+    <!-- Homes Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 pt-4">
+      <% homes.forEach(home => { %>
+        <div class="bg-white rounded-xl shadow hover:shadow-xl transition-all border border-gray-200 flex flex-col">
+          <img
+            src="<%= home.photoUrl %>"
+            alt="<%= home.houseName %>"
+            class="w-full h-48 object-cover rounded-t-xl"
+            onerror="this.onerror=null;this.src='https://via.placeholder.com/400x300';"
+          />
+          <div class="p-4 flex flex-col justify-between h-full space-y-2">
+            <div>
+              <h2 class="text-xl font-semibold text-gray-800"><%= home.houseName %></h2>
+              <p class="text-gray-500 text-sm flex items-center gap-1">
+                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M12 11c1.104 0 2-.896 2-2s-.896-2-2-2-2 .896-2 2 .896 2 2 2z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" />
+                 </svg>
+                 <%= home.location %></p>
+              <p class="text-yellow-500 font-semibold">⭐ <%= home.rating %> / 5</p>
+              <p class="text-blue-600 font-semibold">₹<%= home.price %> / night</p>
+              
+            </div>
+            <div class="pt-4">
+              <a
+                href="/homes/<%= home.id %>"
+                class="inline-block w-full text-center bg-blue-500 hover:bg-blue-600 text-white py-2 rounded-md font-medium transition duration-200"
+              >
+                View Details
+              </a>
+            </div>
+          </div>
+        </div>
+      <% }) %>
+    </div>
+    
+  </main>
+</body>
+</html>
