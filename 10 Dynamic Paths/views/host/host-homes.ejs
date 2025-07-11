@@ -7,7 +7,7 @@
 
   <!-- Main Content -->
   <main class="w-full max-w-6xl bg-white rounded-2xl shadow-lg p-8 space-y-6">
-    <h1 class="text-4xl font-bold text-blue-600 text-center">Here are all your Favourites</h1>
+    <h1 class="text-4xl font-bold text-blue-600 text-center">All Host Homes</h1>
     <p class="text-gray-600 text-center">Find your next stay or become a host!</p>
 
     <!-- Homes Grid -->
@@ -37,15 +37,13 @@
             </div>
             <div class="pt-4">
               <a
-                href="/homes/<%= home.id %>"
-                class="inline-block w-full text-center bg-blue-500 hover:bg-blue-600 text-white py-2 rounded-md font-medium transition duration-200"
+                href="/host/edit-home/<%= home.id %>?editing=true"
+                class="inline-block w-full text-center bg-yellow-500 hover:bg-yellow-600 text-white py-2 rounded-md font-medium transition duration-200"
               >
-                View Details
+                Edit
               </a>
-              <form 
-                action="/favourites/delete/<%= home.id %>" 
-                method="POST">
-                 <button class="inline-block w-full text-center bg-red-500 hover:bg-red-600 text-white py-2 rounded-md font-medium transition duration-200 mt-2">Remove from Favourite</button>
+              <form action="/host/delete-home/<%= home.id %>" method="POST">
+                <button class="inline-block w-full text-center bg-red-500 hover:bg-red-600 text-white py-2 rounded-md font-medium transition duration-200 mt-2">Delete</button>
               </form>
             </div>
           </div>

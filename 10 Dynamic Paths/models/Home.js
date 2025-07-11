@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const rootDir = require('../utils/path-util');
+const Favourite = require('./Favourite');
 
 
 const homeFilePath = path.join(rootDir,'data','homes.json');
@@ -15,11 +16,15 @@ module.exports =  class Home {
     }
 
     save(callback){
-        this.id = Math.random().toString();
         Home.fetchAll( registeredHomes => {
 
-        registeredHomes.push(this);
-        
+            if(this.id){//edit case
+                registeredHomes = registeredHomes.map(home => home.id !==this.id ? home : this);
+
+            } else{ //new case
+               this.id = Math.random().toString();
+               registeredHomes.push(this);
+            }
         fs.writeFile(homeFilePath,JSON.stringify(registeredHomes),callback
         ); 
         });  
@@ -41,5 +46,29 @@ module.exports =  class Home {
             const home = homes.find(home => home.id === homeId);
             callback(home);
         });
+    }
+
+    static deleteById(homeId,callback) {
+        Home.fetchAll(homes => {
+            const newHomes = homes.filter(home => home.id !== homeId);
+            // const newHomes = homes.filter(home => {
+            //     if(home.id !== homeId){
+            //         return true
+            //     } else{
+            //         return false
+            //     }
+            // })
+            fs.writeFile(homeFilePath,JSON.stringify(newHomes),
+            error => {
+                if(error){
+                    callback(error);
+                    return;
+                }
+                Favourite.removeById(homeId,callback);
+            });
+            
+            
+            
+        })
     }
 }

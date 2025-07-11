@@ -21,7 +21,6 @@ exports.getFavourites = (req, res, next) => {
     res.render('store/favourites.ejs',{homes: favouriteHomes, pageTitle: 'Favourites'});
   } )
   })
- 
 }
 
 exports.postAddFavourites = (req,res,next) => {
@@ -32,6 +31,17 @@ exports.postAddFavourites = (req,res,next) => {
     }
       res.redirect('/favourites');
   })
+}
+
+exports.postRemoveFavourites = (req,res,next) => {
+  const homeId = req.params.homeId;
+  Favourite.removeById(homeId, error => {
+    if(error){
+      console.log("Error occur while removing ",error);
+    }
+    res.redirect('/favourites');
+  })
+  
 }
 
 exports.getHomeDetails = (req,res, next) => {
